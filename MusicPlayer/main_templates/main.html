@@ -1,0 +1,42 @@
+<div class="music-player">
+    {% for item in page_obj %}
+    <div class="cover">
+        <img alt="Album Cover" src="{{item.image.url}}"/>
+    </div>
+
+    <div class="titre">
+        <h3>{{item.artist}}</h3>
+        <h1>{{item.title}}</h1>
+    </div>
+
+    <div class="navigation">
+        <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">
+            <i class="fa fa-step-backward fa-2x"></i>
+        </a>
+        <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
+            <i class="fa fa-step-forward fa-2x"></i>
+        </a>
+    </div>
+
+    <div class="lecteur">
+        <audio class="fc-media" style="width: 100%;" id="fc-media">
+            <source src="{% if item.audio_file %}{{item.audio_file.url}}{% else %}{{item.audio_link}}{% endif %}" type="audio/mp3"/>
+        </audio>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="right-section">
+    <div class="lyrics-container">
+        <div class="lyrics">
+            <p id="song-lyrics" class="song-lyrics"
+               data-lyrics='{% for item in page_obj %}{{ item.lyrics|escape }}{% endfor %}'>
+               Loading lyrics...
+            </p>
+        </div>
+        <div class="time-display">
+            <span class="current-time">00:00</span>
+            <span class="duration">00:00</span>
+        </div>
+    </div>
+</div>

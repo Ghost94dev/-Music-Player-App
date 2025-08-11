@@ -1,0 +1,205 @@
+.header {
+    height: 65px; /* Adjust height as needed */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    background: white;
+    margin: 18px auto; /* Adds space around */
+    width: 95vw; /* Matches your main container */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header img {
+    max-height: 100%;
+    max-width: 200px; /* Adjust logo size */
+}
+
+.main-container {
+    margin-top: 10px; /* Reduced from 5vh to account for header */
+    height: calc(90vh - 80px); /* Adjust for header height */
+    /* Rest of your existing styles... */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+html, body {
+    height: 100%;
+    background: black;
+    font-family: "Raleway", sans-serif;
+    overflow: hidden;
+}
+
+.main-container {
+    display: flex;
+    height: 90vh;
+    width: 95vw;
+    margin: 5vh auto;
+    gap: 15px;
+}
+
+/* Music Player Section */
+.music-player {
+    width: 30%;
+    height: 90%;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 1));
+    box-shadow: 1px 10px 20px 5px #222;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.cover {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cover img {
+    width: 70%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.titre {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titre h1 {
+    margin: 0;
+    font-size: 27px;
+    color: #fff;
+}
+
+.titre h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #ccc;
+    font-weight: 500;
+}
+
+.navigation {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.navigation a:hover {
+    color: #88ff00;
+}
+
+
+.navigation a {
+    color: #5bbb95;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 20px;
+}
+
+/* Lyrics Section */
+.right-section {
+    width: 70%;
+    height: 90%;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, rgba(4, 3, 3, 0.9), rgba(0, 0, 0, 1));
+    box-shadow: 1px 10px 20px 5px #222;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+}
+
+/* Player Controls */
+.lecteur {
+    margin-top: auto;
+    width: 100%;
+}
+
+.lyrics-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lyrics {
+    font-size: 3.5vw;
+    font-family: "Sofia", sans-serif;
+    color: #88ff00;
+    text-align: center;
+    line-height: 1.6;
+    width: 100%;
+}
+
+.time-display {
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 30px);
+    display: flex;
+    justify-content: space-between;
+    color: #ccc;
+    font-size: 14px;
+}
+
+/* MediaElement Player Styles */
+.mejs__container {
+    background-color: transparent !important;
+    width: 100% !important;
+    height: 40px !important;
+    margin-top: 10px;
+}
+
+.mejs__controls {
+    padding: 0 10% !important;
+    background: transparent !important;
+    height: 40px !important;
+}
+
+.mejs__time{
+     color: #fff !important;
+    font-size: 12px !important;
+    padding: 0 5px !important;
+
+}
+
+.mejs__controls .mejs__time-rail .mejs__time-current {
+    background: #5BBB95;
+}
+
+.mejs__controls .mejs__playpause-button button,
+.mejs__controls .mejs__volume-button button {
+    color: #5bbb95;
+}
+
+/* Hide scrollbars */
+::-webkit-scrollbar {
+    display: none;
+}
+
+.mejs__time-rail {
+    margin: 0 10px !important;
+}
+
+.mejs__time-current {
+    background: #5BBB95 !important;
+}
+
+.mejs__playpause-button button,
+.mejs__volume-button button {
+    color: #5bbb95 !important;
+    font-size: 20px !important;
+}
