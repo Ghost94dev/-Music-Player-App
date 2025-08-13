@@ -203,3 +203,13 @@ html, body {
     color: #5bbb95 !important;
     font-size: 20px !important;
 }
+
+.header a {
+    font-weight: bold;
+    color: #008000;
+    text-decoration: none;
+}
+
+.header a:hover {
+    color: #FFFF00; /* Slightly darker hover effect */
+}

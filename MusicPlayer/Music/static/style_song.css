@@ -1,0 +1,66 @@
+/* style_song.css */
+
+html, body {
+    height: 100%;
+    background: #F0FFFF; /* Light background */
+    font-family: "Raleway", sans-serif;
+    overflow: auto; /* Allow scrolling if needed */
+    color: #222;
+}
+
+/* Header styles for song list */
+.header {
+    height: 65px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    background: white;
+    margin: 18px auto;
+    width: 95vw;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header img {
+    max-height: 100%;
+    max-width: 200px; /* Adjust logo size */
+}
+
+.header a {
+    font-weight: bold;
+    color: #008000 !important; /* Force override */
+    text-decoration: none;
+}
+
+.header a:hover {
+    color: #FFFF00 !important;
+}
+
+/* Song list styles */
+.song-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.song-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+.song-item a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.song-item a:hover {
+    text-decoration: underline;
+}

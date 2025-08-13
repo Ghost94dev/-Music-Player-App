@@ -12,6 +12,7 @@
 <body>
    <div class="header">
         <img src="{% static 'images/logo.png' %}" alt="Your Logo">
+        <a href="{% url 'music:song_list' %}">All Songs</a>
     </div>
 
     <div class="main-container">
@@ -21,62 +22,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.7/mediaelement-and-player.min.js"></script>
     <script src="{% static './script.js' %}"></script>
-
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const audio = document.getElementById('fc-media');
-    const lyricsContainer = document.getElementById('song-lyrics');
-    const currentTimeDisplay = document.querySelector('.current-time');
-    const durationDisplay = document.querySelector('.duration');
-
-    try {
-        // Debug: Check what's actually in the attribute
-        console.log("Raw lyrics data:", lyricsContainer.getAttribute('data-lyrics'));
-
-        const lyricsData = JSON.parse(lyricsContainer.getAttribute('data-lyrics'));
-        console.log("Parsed lyrics:", lyricsData);
-
-        let currentLyricIndex = 0;
-
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        audio.addEventListener('loadedmetadata', function() {
-            durationDisplay.textContent = formatTime(audio.duration);
-        });
-
-        audio.addEventListener('timeupdate', function() {
-            currentTimeDisplay.textContent = formatTime(audio.currentTime);
-
-            // Only proceed if we have lyrics data
-            if (lyricsData && lyricsData.length > 0) {
-                const currentTime = audio.currentTime;
-
-                // Find current lyric
-                while (currentLyricIndex < lyricsData.length - 1 &&
-                       currentTime >= timeToSeconds(lyricsData[currentLyricIndex + 1].time)) {
-                    currentLyricIndex++;
-                }
-
-                lyricsContainer.innerText = lyricsData[currentLyricIndex].lyrics;
-            }
-        });
-
-        function timeToSeconds(time) {
-            const parts = time.split(':');
-            if (parts.length === 2) {
-                return parseFloat(parts[0]) * 60 + parseFloat(parts[1]);
-            }
-            return 0;
-        }
-    } catch (e) {
-        console.error("Error processing lyrics:", e);
-        lyricsContainer.innerText = "Lyrics loading failed";
-    }
-});
-    </script>
 </body>
 </html>

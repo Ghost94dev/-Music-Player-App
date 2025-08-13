@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>All Songs</title>
+    <link rel="stylesheet" href="{% static 'style_song.css' %}">
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'images/logo.png' %}" alt="Your Logo">
+        <a href="{% url 'music:index' %}">Home</a>
+    </div>
+
+    <h1>All Songs</h1>
+    <ul>
+        {% for song in songs %}
+            <li>
+                <img src="{{ song.image.url }}" alt="{{ song.title }}" width="50">
+
+                <a href="{% url 'music:index' %}?song_id={{ song.id }}">
+                    {{ song.title }} - {{ song.artist }}
+                </a>
+            </li>
+        {% empty %}
+            <li>No songs available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<div class="music-player">
+<div class="music-player" data-total-pages="{{total_page}}">
     {% for item in page_obj %}
     <div class="cover">
         <img alt="Album Cover" src="{{item.image.url}}"/>
@@ -10,10 +10,10 @@
     </div>
 
     <div class="navigation">
-        <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">
+        <a href="javascript:void(0);" onclick="audio.playPrevious()">
             <i class="fa fa-step-backward fa-2x"></i>
         </a>
-        <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
+        <a href="javascript:void(0);" onclick="audio.playNext()">
             <i class="fa fa-step-forward fa-2x"></i>
         </a>
     </div>
@@ -30,8 +30,7 @@
     <div class="lyrics-container">
         <div class="lyrics">
             <p id="song-lyrics" class="song-lyrics"
-               data-lyrics='{% for item in page_obj %}{{ item.lyrics|escape }}{% endfor %}'>
-               Loading lyrics...
+               data-lyrics="{% for item in page_obj %}{{item.lyrics|escape}}{% endfor %}">
             </p>
         </div>
         <div class="time-display">
@@ -40,3 +39,4 @@
         </div>
     </div>
 </div>
+
