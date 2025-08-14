@@ -1,13 +1,14 @@
 .header {
-    height: 65px; /* Adjust height as needed */
+    height: 65px;
     padding: 10px 20px;
     display: flex;
     align-items: center;
     background: white;
     margin: 18px auto; /* Adds space around */
-    width: 95vw; /* Matches your main container */
+    width: 95vw; /* Matches main container */
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    gap: 20px;
 }
 
 .header img {
@@ -16,9 +17,9 @@
 }
 
 .main-container {
-    margin-top: 10px; /* Reduced from 5vh to account for header */
+    margin-top: 10px;
     height: calc(90vh - 80px); /* Adjust for header height */
-    /* Rest of your existing styles... */
+
 }
 
 * {
@@ -211,5 +212,5 @@ html, body {
 }
 
 .header a:hover {
-    color: #FFFF00; /* Slightly darker hover effect */
+    color: #FFFF00;
 }

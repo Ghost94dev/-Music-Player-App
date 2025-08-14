@@ -1,8 +1,7 @@
 /* style_song.css */
-
 html, body {
     height: 100%;
-    background: #F0FFFF; /* Light background */
+    background: #F0FFFF;
     font-family: "Raleway", sans-serif;
     overflow: auto; /* Allow scrolling if needed */
     color: #222;
@@ -19,11 +18,12 @@ html, body {
     width: 95vw;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    gap: 20px;
 }
 
 .header img {
     max-height: 100%;
-    max-width: 200px; /* Adjust logo size */
+    max-width: 200px;
 }
 
 .header a {
@@ -63,4 +63,28 @@ html, body {
 
 .song-item a:hover {
     text-decoration: underline;
+}
+
+form {
+    margin: 20px 0;
+}
+
+form input[type="text"] {
+    padding: 8px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 8px 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #218838;
 }

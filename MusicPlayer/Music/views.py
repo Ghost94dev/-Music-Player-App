@@ -1,7 +1,14 @@
-from django.shortcuts import render , get_object_or_404
+from django.shortcuts import render , get_object_or_404 , redirect
 from django.http import HttpResponse
 from Music.models import Song
 from django.core.paginator import Paginator
+import syncedlyrics
+import re
+import json
+from Music.forms import SongForm
+from django.http import JsonResponse
+from django.urls import reverse
+from django.db.models import Q
 
 # Create your views here.
 
@@ -14,7 +21,7 @@ def index(request):
 
     if song_id:  # Directly load one song
         song = get_object_or_404(Song, id=song_id)
-        page_obj = [song]       # Just put it in a list for template compatibility
+        page_obj = [song]
         total_page = 1
 
         context = {
@@ -29,7 +36,7 @@ def index(request):
         page_obj = paginator.get_page(page_number)
         total_page = paginator.num_pages
 
-        # Debug output - check in your server console
+
         for song in page_obj:
             print("Lyrics data:", song.lyrics)
 
@@ -42,5 +49,40 @@ def index(request):
 
 
 def song_list(request):
-    songs = Song.objects.all().order_by("id")  # Get all songs
-    return render(request, "songs_list.html", {"songs": songs})
+    query = request.GET.get('q', '')  # search term from URL
+    songs = Song.objects.all().order_by("id")
+
+    if query:
+        songs = songs.filter(
+            Q(title__icontains=query) | Q(artist__icontains=query)
+        )
+
+    return render(request, "songs_list.html", {"songs": songs, "query": query})
+
+
+def add_song(request):
+    if request.method == 'POST':
+        form = SongForm(request.POST, request.FILES)
+        if form.is_valid():
+            song = form.save()  # Save and store the instance in `song`
+            return redirect(f"{reverse('music:index')}?song_id={song.id}")
+    else:
+        form = SongForm()
+
+    return render(request, 'add_song.html', {'form': form})
+
+
+def get_lyrics(request):
+    lyrics_json = None
+    query = request.GET.get("query")
+    if query:
+        lrc = syncedlyrics.search(query)
+        pattern = r'\[(\d+:\d+\.\d+)\] (.+)'
+        json_data = []
+        for line in lrc.split('\n'):
+            match = re.match(pattern, line)
+            if match:
+                timestamp, text = match.groups()
+                json_data.append({"time": timestamp, "lyrics": text})
+        lyrics_json = json.dumps(json_data, indent=4)
+    return render(request, "get_lyrics.html", {"lyrics_json": lyrics_json})

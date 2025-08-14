@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Get Lyrics</title>
+    <link rel="stylesheet" href="{% static 'AddSongLyrics.css' %}">
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'images/logo.png' %}" alt="Your Logo">
+        <a href="{% url 'music:index' %}">Home</a>
+        <a href="{% url 'music:song_list' %}">All Songs</a>
+    </div>
+
+    <div class="form-container">
+        <h1>Fetch Song Lyrics</h1>
+         <div class="notice">
+            Important:
+            * Start to copy the lyrics from { to }
+         </div>
+        <form method="GET">
+            <input type="text" name="query" placeholder="Enter song name" required>
+            <button type="submit">Get Lyrics</button>
+        </form>
+
+        {% if lyrics_json %}
+            <h2>Lyrics JSON</h2>
+            <textarea readonly onclick="this.select();">{{ lyrics_json }}</textarea>
+        {% endif %}
+    </div>
+</body>
+</html>

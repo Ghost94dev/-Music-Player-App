@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Add Song</title>
+    <link rel="stylesheet" href="{% static 'AddSongLyrics.css' %}">
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'images/logo.png' %}" alt="Your Logo">
+        <a href="{% url 'music:index' %}">Home</a>
+        <a href="{% url 'music:song_list' %}">All Songs</a>
+    </div>
+
+    <div class="form-container">
+        <h1>Add New Song</h1>
+        <div class="notice">
+            Important:
+            1. Download the image of the song.
+            2. Download the song from <a href="https://t.me/vkmusic_bot" target="_blank">@vkmusic_bot</a>.
+            3. Get your lyrics from <a href="{% url 'music:get_lyrics' %}">Get Lyrics</a>.
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Song</button>
+        </form>
+    </div>
+</body>
+</html>

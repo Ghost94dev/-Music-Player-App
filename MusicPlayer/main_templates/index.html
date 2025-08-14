@@ -13,6 +13,8 @@
    <div class="header">
         <img src="{% static 'images/logo.png' %}" alt="Your Logo">
         <a href="{% url 'music:song_list' %}">All Songs</a>
+        <a href="{% url 'music:add_song' %}">Add Song</a>
+        <a href="{% url 'music:get_lyrics' %}">Get Lyrics</a>
     </div>
 
     <div class="main-container">
