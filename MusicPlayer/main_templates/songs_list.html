@@ -16,24 +16,49 @@
 
     <h1>All Songs</h1>
 
-    <form method="get" action="{% url 'music:song_list' %}">
-        <input type="text" name="q" placeholder="Search by title or artist"
-               value="{{ query }}">
-        <button type="submit">Search</button>
-    </form>
+    <form method="get" action="{% url 'music:song_list' %}" id="search-form">
+    <input type="text" id="search-input" placeholder="Search by title or artist">
+</form>
 
-    <ul>
-        {% for song in songs %}
-            <li>
-                <img src="{{ song.image.url }}" alt="{{ song.title }}" width="50">
+<ul id="song-list">
+    {% for song in songs %}
+        <li>
+            <img src="{{ song.image.url }}" alt="{{ song.title }}" width="50">
+            <a href="{% url 'music:index' %}?song_id={{ song.id }}">
+                {{ song.title }} - {{ song.artist }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No songs available.</li>
+    {% endfor %}
+</ul>
 
-                <a href="{% url 'music:index' %}?song_id={{ song.id }}">
-                    {{ song.title }} - {{ song.artist }}
-                </a>
-            </li>
-        {% empty %}
-            <li>No songs available.</li>
-        {% endfor %}
-    </ul>
+<script>
+document.getElementById('search-input').addEventListener('input', function () {
+    let query = this.value;
+    fetch(`/search-songs/?q=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+            let songList = document.getElementById('song-list');
+            songList.innerHTML = '';
+
+            if (data.songs.length === 0) {
+                songList.innerHTML = '<li>No songs found.</li>';
+                return;
+            }
+
+            data.songs.forEach(song => {
+                let li = document.createElement('li');
+                li.innerHTML = `
+                    <img src="${song.image}" alt="${song.title}" width="50">
+                    <a href="/?song_id=${song.id}">
+                        ${song.title} - ${song.artist}
+                    </a>
+                `;
+                songList.appendChild(li);
+            });
+        });
+});
+</script>
 </body>
 </html>

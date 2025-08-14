@@ -86,3 +86,22 @@ def get_lyrics(request):
                 json_data.append({"time": timestamp, "lyrics": text})
         lyrics_json = json.dumps(json_data, indent=4)
     return render(request, "get_lyrics.html", {"lyrics_json": lyrics_json})
+
+
+
+def search_songs(request):
+    query = request.GET.get('q', '')
+    songs = Song.objects.filter(
+        Q(title__icontains=query) | Q(artist__icontains=query)
+    ).order_by("id") if query else Song.objects.all().order_by("id")
+
+    results = []
+    for song in songs:
+        results.append({
+            "id": song.id,
+            "title": song.title,
+            "artist": song.artist,
+            "image": song.image.url if song.image else "",
+        })
+
+    return JsonResponse({"songs": results})
