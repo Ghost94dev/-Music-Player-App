@@ -11,13 +11,14 @@
         <img src="{% static 'images/logo.png' %}" alt="Your Logo">
         <a href="{% url 'music:index' %}">Home</a>
         <a href="{% url 'music:song_list' %}">All Songs</a>
+        <a href="{% url 'music:add_song' %}">Add Song</a>
     </div>
 
     <div class="form-container">
         <h1>Fetch Song Lyrics</h1>
          <div class="notice">
-            Important:
-            * Start to copy the lyrics from { to }
+            Important !
+            <p>* Start to copy the lyrics from { to }</p>
          </div>
         <form method="GET">
             <input type="text" name="query" placeholder="Enter song name" required>

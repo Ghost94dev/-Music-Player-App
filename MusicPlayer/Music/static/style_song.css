@@ -28,7 +28,7 @@ html, body {
 
 .header a {
     font-weight: bold;
-    color: #008000 !important; /* Force override */
+    color: #008000 !important;
     text-decoration: none;
 }
 
