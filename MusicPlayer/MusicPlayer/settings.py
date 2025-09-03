@@ -32,9 +32,9 @@ DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in ("true", "1", "yes")
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = ['   "localhost",
+ALLOWED_HOSTS = ["localhost",
     "127.0.0.1",
-    os.getenv("RENDER_EXTERNAL_HOSTNAME", ""),']
+    os.getenv("RENDER_EXTERNAL_HOSTNAME", ""),]
 
 
 # Application definition
