@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-53iujsk*#^nfd&gduc9^f$_s83snxp8n1v8%kxsucpa40_6$&t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['evlin-music-player.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['music-player-app-1tcc.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
