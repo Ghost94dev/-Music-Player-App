@@ -17,3 +17,5 @@ typing_extensions==4.14.1
 six==1.17.0
 python-dotenv==1.1.1
 cloudinary==1.44.1
+django-cloudinary-storage==0.3.0
+
