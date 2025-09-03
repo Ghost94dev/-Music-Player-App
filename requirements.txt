@@ -15,4 +15,5 @@ sqlparse==0.5.3
 tzdata==2025.2
 typing_extensions==4.14.1
 six==1.17.0
+python-dotenv==1.1.1
 cloudinary==1.44.1
