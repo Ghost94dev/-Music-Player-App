@@ -1,4 +1,5 @@
 {% load static %}
+{% load url_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
 <ul id="song-list">
     {% for song in songs %}
         <li>
-            <img src="{% if song.image %}{{ song.image.url }}{% else %}{% static 'images/default-cover.png' %}{% endif %}"
+            <img src="{% if song.image %}{{ song.image.url | make_secure  }}{% else %}{% static 'images/default-cover.png' %}{% endif %}"
      alt="{{ song.title }}" width="50">
             <a href="{% url 'music:index' %}?song_id={{ song.id }}">
                 {{ song.title }} - {{ song.artist }}
