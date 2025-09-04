@@ -10,6 +10,12 @@ from django.http import JsonResponse
 from django.urls import reverse
 from django.db.models import Q
 
+import os
+import cloudinary
+from cloudinary import uploader
+
+
+
 # Create your views here.
 
 def home(request):
