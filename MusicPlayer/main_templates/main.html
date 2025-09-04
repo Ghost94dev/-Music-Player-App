@@ -2,7 +2,7 @@
     {% for item in page_obj %}
     <div class="cover">
         <img alt="Album Cover"
-             src="{% if item.image %}{{ item.secure_image.url }}{% else %}{% static 'images/default-cover.png' %}{% endif %}"/>
+             src="{% if item.image %}{{ item.secure_image_url }}{% else %}{% static 'images/default-cover.png' %}{% endif %}"/>
     </div>
 
     <div class="titre">
@@ -21,7 +21,12 @@
 
     <div class="lecteur">
         <audio class="fc-media" style="width: 100%;" id="fc-media">
-            <source src="{% if item.secure_audio_file %}{{item.audio_file.url }}{% else %}{{item.audio_link}}{% endif %}" type="audio/mp3"/>
+           {% if item.secure_audio_url %}
+                <source src="{{ item.secure_audio_url }}" type="audio/mp3"/>
+          {% else %}
+          {# Fallback to audio_link if audio_file is not available #}
+                 <source src="{{ item.audio_link }}" type="audio/mp3"/>
+          {% endif %}
         </audio>
     </div>
     {% endfor %}

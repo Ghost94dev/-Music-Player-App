@@ -113,7 +113,7 @@ def search_songs(request):
             "id": song.id,
             "title": song.title,
             "artist": song.artist,
-            "image": song.image.url if song.image else "",
+            "image": song.secure_image.url if song.image else "",
         })
 
     return JsonResponse({"songs": results})

@@ -26,20 +26,26 @@ class Song(models.Model):
     @property
     def secure_image_url(self):
         """Returns the image URL with HTTPS"""
-        if self.image:
-            url = self.image.url
-            if url.startswith('http://'):
-                return url.replace('http://', 'https://', 1)
-            return url
-        return None
+        try:
+            if self.image and hasattr(self.image, 'url'):
+                url = self.image.url
+                if url and url.startswith('http://'):
+                    return url.replace('http://', 'https://', 1)
+                return url
+        except (ValueError, AttributeError):
+            pass
+        return ''  # Return empty string instead of None
 
     @property
     def secure_audio_url(self):
         """Returns the audio URL with HTTPS"""
-        if self.audio_file:
-            url = self.audio_file.url
-            if url.startswith('http://'):
-                return url.replace('http://', 'https://', 1)
-            return url
-        return None
+        try:
+            if self.audio_file and hasattr(self.audio_file, 'url'):
+                url = self.audio_file.url
+                if url and url.startswith('http://'):
+                    return url.replace('http://', 'https://', 1)
+                return url
+        except (ValueError, AttributeError):
+            pass
+        return ''  # Return empty string instead of None
 
