@@ -8,7 +8,9 @@ services:
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
       python manage.py migrate
-    startCommand: gunicorn MusicPlayer.wsgi:application --bind 0.0.0.0:$PORT
+    startCommand: gunicorn --pythonpath . MusicPlayer.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: DEBUG
-        value: "False
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
