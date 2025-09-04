@@ -1,12 +1,13 @@
 from django.db import models
 import json, ast
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class Song(models.Model):
     title = models.TextField()
     artist = models.TextField()
-    image = models.ImageField()
-    audio_file = models.FileField()
+    image = CloudinaryField('image', folder='songs/images/')
+    audio_file = CloudinaryField('raw', resource_type='raw', folder='songs/audio/')
     audio_link = models.CharField(max_length=200, null=True, blank=True)
     lyrics = models.TextField(default='[]')
     duration = models.CharField(max_length=20)
