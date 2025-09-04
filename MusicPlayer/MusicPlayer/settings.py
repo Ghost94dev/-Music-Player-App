@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     os.getenv("RENDER_EXTERNAL_HOSTNAME", ""),
-    "music-player-app-w56z.onrender.com",
+    "music-player-app-s6mv.onrender.com",
     ".onrender.com"
 ]
 
