@@ -6,8 +6,8 @@ from cloudinary.models import CloudinaryField
 class Song(models.Model):
     title = models.TextField()
     artist = models.TextField()
-    image = CloudinaryField('image', folder='songs/images/')
-    audio_file = CloudinaryField('raw', resource_type='raw', folder='songs/audio/')
+    image = CloudinaryField('image')
+    audio_file = CloudinaryField(resource_type='video')
     audio_link = models.CharField(max_length=200, null=True, blank=True)
     lyrics = models.TextField(default='[]')
     duration = models.CharField(max_length=20)

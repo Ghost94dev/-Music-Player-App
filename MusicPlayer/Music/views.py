@@ -64,8 +64,14 @@ def add_song(request):
     if request.method == 'POST':
         form = SongForm(request.POST, request.FILES)
         if form.is_valid():
-            song = form.save()  # Save and store the instance in `song`
-            return redirect(f"{reverse('music:index')}?song_id={song.id}")
+            try:
+                song = form.save()
+                return redirect(f"{reverse('music:index')}?song_id={song.id}")
+            except Exception as e:
+                # Log the error for debugging
+                print(f"Error saving song: {e}")
+                # error message to form
+                form.add_error(None, "Error saving song. Please try again.")
     else:
         form = SongForm()
 

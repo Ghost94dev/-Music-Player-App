@@ -23,7 +23,8 @@
 <ul id="song-list">
     {% for song in songs %}
         <li>
-            <img src="{{ song.image.url }}" alt="{{ song.title }}" width="50">
+            <img src="{% if song.image %}{{ song.image.url }}{% else %}{% static 'images/default-cover.png' %}{% endif %}"
+     alt="{{ song.title }}" width="50">
             <a href="{% url 'music:index' %}?song_id={{ song.id }}">
                 {{ song.title }} - {{ song.artist }}
             </a>

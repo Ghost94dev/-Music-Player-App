@@ -1,7 +1,8 @@
 <div class="music-player" data-total-pages="{{total_page}}">
     {% for item in page_obj %}
     <div class="cover">
-        <img alt="Album Cover" src="{{item.image.url}}"/>
+        <img alt="Album Cover"
+             src="{% if item.image %}{{ item.image.url }}{% else %}{% static 'images/default-cover.png' %}{% endif %}"/>
     </div>
 
     <div class="titre">
