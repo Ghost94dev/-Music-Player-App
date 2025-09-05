@@ -3,18 +3,29 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>music player</title>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.7/mediaelementplayer.min.css" rel="stylesheet"/>
     <link href="{% static './style.css' %}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
    <div class="header">
         <img src="{% static 'images/logo.png' %}" alt="Your Logo">
-        <a href="{% url 'music:song_list' %}">All Songs</a>
-        <a href="{% url 'music:add_song' %}">Add Song</a>
-        <a href="{% url 'music:get_lyrics' %}">Get Lyrics</a>
+        <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+            <a href="{% url 'music:index' %}">Home</a>
+            <a href="{% url 'music:song_list' %}">All Songs</a>
+            <a href="{% url 'music:add_song' %}">Add Song</a>
+            <a href="{% url 'music:get_lyrics' %}">Get Lyrics</a>
+        </nav>
     </div>
 
     <div class="main-container">

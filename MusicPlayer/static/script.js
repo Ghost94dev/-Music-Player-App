@@ -1,9 +1,11 @@
+// script.js - Clean version
 var audio = {
     init: function() {
         var $that = this;
         $(function() {
             $that.components.media();
             $that.setupAutoPlay();
+            $that.setupMobileNavigation();
         });
     },
     components: {
@@ -76,6 +78,27 @@ var audio = {
 
         // Navigate to the previous page
         window.location.href = "?page=" + previousPage;
+    },
+
+    setupMobileNavigation: function() {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            });
+        }
     }
 };
 
