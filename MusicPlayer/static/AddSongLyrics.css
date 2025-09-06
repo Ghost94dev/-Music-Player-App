@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 0;
     color: #222;
-    padding-top: 85px;
 }
 
 .header {
@@ -42,7 +41,7 @@ body {
 
 .form-container {
     max-width: 600px;
-    margin: 40px auto;
+    margin: calc(65px + 30px) auto 40px;
     background: #fff;
     padding: 20px 30px;
     border-radius: 10px;

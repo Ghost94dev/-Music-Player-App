@@ -5,14 +5,24 @@
     <meta charset="utf-8">
     <title>Add Song</title>
     <link rel="stylesheet" href="{% static 'AddSongLyrics.css' %}">
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+
 </head>
 <body>
-    <div class="header">
-        <img src="{% static 'images/logo.png' %}" alt="Your Logo">
-        <a href="{% url 'music:index' %}">Home</a>
-        <a href="{% url 'music:song_list' %}">All Songs</a>
-        <a href="{% url 'music:get_lyrics' %}">Get Lyrics</a>
-    </div>
+   <div class="header">
+  <div class="header-inner">
+    <img src="{% static 'images/logo.png' %}" alt="Your Logo">
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-menu" id="navMenu">
+      <a href="{% url 'music:index' %}">Home</a>
+      <a href="{% url 'music:song_list' %}">All Songs</a>
+      <a href="{% url 'music:get_lyrics' %}">Get Lyrics</a>
+    </nav>
+  </div>
+</div>
 
     <div class="form-container">
         <h1>Add New Song</h1>
@@ -29,5 +39,16 @@
             <button type="submit">Add Song</button>
         </form>
     </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+
+    hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
+});
+</script>
 </body>
 </html>

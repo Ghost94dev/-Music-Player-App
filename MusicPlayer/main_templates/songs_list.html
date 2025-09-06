@@ -5,34 +5,46 @@
     <meta charset="utf-8">
     <title>All Songs</title>
     <link rel="stylesheet" href="{% static 'style_song.css' %}">
+
+
 </head>
 <body>
-    <div class="header">
-        <img src="{% static 'images/logo.png' %}" alt="Your Logo">
-        <a href="{% url 'music:index' %}">Home</a>
-        <a href="{% url 'music:add_song' %}">Add Song</a>
-        <a href="{% url 'music:get_lyrics' %}">Get Lyrics</a>
+     <div class="header">
+  <div class="header-inner">
+    <img src="{% static 'images/logo.png' %}" alt="Your Logo">
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-menu" id="navMenu">
+      <a href="{% url 'music:index' %}">Home</a>
+       <a href="{% url 'music:add_song' %}">Add Songs</a>
+      <a href="{% url 'music:get_lyrics' %}">Get Lyrics</a>
+    </nav>
+  </div>
+</div>
+
+    <div class="content-wrapper">
+        <h1>All Songs</h1>
+
+        <form method="get" action="{% url 'music:song_list' %}" id="search-form">
+            <input type="text" id="search-input" placeholder="Search by title or artist">
+        </form>
+
+        <ul id="song-list">
+            {% for song in songs %}
+                <li class="song-item">
+                    <img src="{% if song.image %}{{ song.secure_image_url }}{% else %}{% static 'images/default-cover.png' %}{% endif %}"
+                         alt="{{ song.title }}" width="50">
+                    <a href="{% url 'music:index' %}?song_id={{ song.id }}">
+                        {{ song.title }} - {{ song.artist }}
+                    </a>
+                </li>
+            {% empty %}
+                <li>No songs available.</li>
+            {% endfor %}
+        </ul>
     </div>
-
-    <h1>All Songs</h1>
-
-    <form method="get" action="{% url 'music:song_list' %}" id="search-form">
-    <input type="text" id="search-input" placeholder="Search by title or artist">
-</form>
-
-<ul id="song-list">
-    {% for song in songs %}
-        <li>
-            <img src="{% if item.image %}{{ item.secure_image_url }}{% else %}{% static 'images/default-cover.png' %}{% endif %}"
-     alt="{{ song.title }}" width="50">
-            <a href="{% url 'music:index' %}?song_id={{ song.id }}">
-                {{ song.title }} - {{ song.artist }}
-            </a>
-        </li>
-    {% empty %}
-        <li>No songs available.</li>
-    {% endfor %}
-</ul>
 
 <script>
 document.getElementById('search-input').addEventListener('input', function () {
@@ -50,6 +62,7 @@ document.getElementById('search-input').addEventListener('input', function () {
 
             data.songs.forEach(song => {
                 let li = document.createElement('li');
+                li.className = 'song-item';
                 li.innerHTML = `
                     <img src="${song.image}" alt="${song.title}" width="50">
                     <a href="/?song_id=${song.id}">
@@ -59,6 +72,15 @@ document.getElementById('search-input').addEventListener('input', function () {
                 songList.appendChild(li);
             });
         });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+
+    hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
 });
 </script>
 </body>
